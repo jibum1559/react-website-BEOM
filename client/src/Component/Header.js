@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 //Navbar.Collapse : 화면이 모바일로 작아졌을 때를 대비해서 감싸줌
 //aria-controls="basic-navbar-nav" : 네비게이션에서 기본 메뉴를 나타냄
 //as={Link} : 추후 App에서 전달받을 Router를 지원해준다는 의미
-export default function Header() {
+const Header = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -15,26 +15,33 @@ export default function Header() {
           로고
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse>
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
-          <Nav.Link as={Link} to="/movie">
-            Movies
-          </Nav.Link>
-          <Nav.Link as={Link} to="/todos">
-            Todo List
-          </Nav.Link>
-          <NavDropdown title="Games" id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/numberGuessingGame">
-              Number Guessing Game
-            </NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/quiz">
-              Quiz
-            </NavDropdown.Item>
-          </NavDropdown>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/movie">
+              Movies
+            </Nav.Link>
+            <Nav.Link as={Link} to="/todos">
+              Todo List
+            </Nav.Link>
+            <Nav.Link as={Link} to="/weather">
+              Weather Search
+            </Nav.Link>
+            <NavDropdown title="Games" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/numberGuessingGame">
+                Number Guessing Game
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/quiz">
+                Quiz
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-}
+};
+
+export default Header;

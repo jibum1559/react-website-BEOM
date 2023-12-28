@@ -1,72 +1,40 @@
-// App.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Component/Home';
+import MovieList from './Component/Moive/MovieList';
+import NumberGuessingGame from './Component/Game/NumberGuessingGame';
+import Quiz from './Component/Game/Quiz';
+import Header from './Component/Header';
+import Footer from './Component/Footer';
+import Todo from './Component/Todo/Todo';
+import WeatherSearch from './Component/Weather/WeatherSearch';
 
 function App() {
-  const [cafes, setCafes] = useState([]);
-  const [newCafe, setNewCafe] = useState({ name: '', price: '' });
-
-  useEffect(() => {
-    const timestamp = new Date().getTime();
-    axios
-      .get(`http://localhost:5003/api/cafe?timestamp=${timestamp}`)
-      .then((response) => setCafes(response.data))
-      .catch((error) => console.error('에러입니다.', error));
-  }, []);
-
-  const addCafe = () => {
-    axios
-      .post('http://localhost:5003/api/cafes', newCafe)
-      .then(() => {
-        axios
-          .get(
-            `http://localhost:5003/api/cafe?timestamp=${new Date().getTime()}`
-          )
-          .then((response) => {
-            setCafes(response.data);
-            setNewCafe({ name: '', price: '' });
-          })
-          .catch((error) => console.error('에러입니다.', error));
-      })
-      .catch((error) => console.error('에러입니다.', error));
-  };
-
   return (
-    <div>
-      <h1>카페 리스트</h1>
-
-      <ul>
-        {cafes.map((cafe) => (
-          <li key={cafe.ID}>
-            {cafe.NAME} - {cafe.PRICE}원
-          </li>
-        ))}
-      </ul>
-
-      <h2>새로운 카페 추가</h2>
+    <Router>
       <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          value={newCafe.name}
-          onChange={(e) => setNewCafe({ ...newCafe, name: e.target.value })}
-        />
+        <Header />
+
+        <div className="container mt-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie" element={<MovieList />} />
+            <Route path="/todos" element={<Todo />} />
+            <Route
+              path="/numberGuessingGame"
+              element={<NumberGuessingGame />}
+            />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/weather" element={<WeatherSearch />} />
+          </Routes>
+        </div>
+
+        <Footer />
       </div>
-      <div>
-        <label>Price:</label>
-        <input
-          type="text"
-          value={newCafe.price}
-          onChange={(e) => setNewCafe({ ...newCafe, price: e.target.value })}
-        />
-      </div>
-      <button onClick={addCafe}>추가하기</button>
-    </div>
+    </Router>
   );
 }
 
 export default App;
-/*key={cafe[0]} = key={cafe.ID}
-cafe[1] = cafe.NAME
-cafe[2] = cafe.PRICE
-*/
+
+// App.js 활용해서 -> react-router-dom Link
