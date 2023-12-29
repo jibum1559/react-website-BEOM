@@ -6,7 +6,7 @@ import NumberGuessingGame from './Component/Game/NumberGuessingGame';
 import Quiz from './Component/Game/Quiz';
 import Header from './Component/Header';
 import Footer from './Component/Footer';
-import Todo from './Component/Todo/Todo';
+import TodoNoCss from './Component/Todo/TodoNoCss';
 import WeatherSearch from './Component/Weather/WeatherSearch';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movie" element={<MovieList />} />
-            <Route path="/todos" element={<Todo />} />
+            <Route path="/todos" element={<TodoNoCss />} />
             <Route
               path="/numberGuessingGame"
               element={<NumberGuessingGame />}

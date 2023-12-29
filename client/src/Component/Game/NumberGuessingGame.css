@@ -1,0 +1,40 @@
+.number-guessing-game {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  background-color: #f50057;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #ff4081;
+}
+
+.message {
+  font-weight: bold;
+  color: #f50057;
+}
+
+.mt-3 p {
+  margin: 5px 0;
+}
+
+.game-over-message {
+  color: #ff4081;
+  font-weight: bold;
+}

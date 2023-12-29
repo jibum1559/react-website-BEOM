@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ProgressBar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Quiz = () => {
   const questions = [
@@ -77,6 +78,15 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false); //처음에는 값이 없어서 보여줄 것이 없기 때문에 false
 
+  //프로그래스바가 100% 되는 값을 넣어주는 함수 생성
+  const progress = (currentQuestion / questions.length) * 100;
+  //currentQuestion : 현재 사용자가 답한 질문의 번호를 나타내는 상태
+  //questions.length : 전체 질문의 개수
+  //예를 들어서 currentQuestion 가 1이고
+  //questions.length 가 7이라면
+  //progress 는 (1/7) * 100 계산되어 약 14.29%가 됨
+  // 14.29% 는 사용자가 퀴즈를 14.29% 완료했음을 보여줄 수 있음
+
   const AnswerButtonClick = (selectedOption) => {
     if (selectedOption === questions[currentQuestion].correctAnswer) {
       setScore(score + 1);
@@ -111,6 +121,14 @@ const Quiz = () => {
         </div>
       ) : (
         <div>
+          <ProgressBar
+            vaariant="warning"
+            now={progress}
+            style={{ height: '30px', borderRadius: '10px' }}
+            label={`${progress.toFixed(2)} %`}
+          />
+          <ProgressBar now={progress} label={`${progress.toFixed(2)} %`} />
+
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">질문 : {currentQuestion + 1}</h2>
@@ -135,3 +153,6 @@ const Quiz = () => {
   );
 };
 export default Quiz;
+
+//<ProgressBar now={progress} label={`${progress.toFixed(2)} %`} />
+//현재 진행 상태 나타내는 부분

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CreatePags = ({ addAction }) => {
+const CreatePags = (addAction) => {
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState('');
@@ -48,7 +48,7 @@ const CreatePags = ({ addAction }) => {
         <input
           type="text"
           value={date}
-          onChange={(e) => date(e.target.value)}
+          onChange={(e) => setDate(e.target.value)}
         />
         <br />
 
