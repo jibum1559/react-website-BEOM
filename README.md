@@ -13,10 +13,14 @@ https://getbootstrap.com/docs/4.0/utilities/colors/
 
 ## 컨텐츠 구성
 1.Movie List <br/>
-<img src="https://simpleicons.org/icons/themoviedatabase.svg" width="200" height="70">
+2.Todo List<br/>
+3.Weather Search<br/>
+4.Games
+- Number Guessing Game
+- Quiz
 
-2.
-
+## 메인화면
+![image](https://github.com/jibum1559/Final-react-website/assets/143372311/20308712-d705-41a0-bba9-912968d3912c)
 
 
 ## Client Component 구성
