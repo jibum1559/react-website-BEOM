@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import './NumberGuessingGame.css';
+import React, { useState, useEffect } from "react";
+import "./NumberGuessingGame.css";
 import {
   Container,
   Row,
@@ -8,17 +8,17 @@ import {
   Button,
   Alert,
   ProgressBar,
-} from 'react-bootstrap';
+} from "react-bootstrap";
 
-const NumberGuessingGameLimit = () => {
-  const randomNumber = () => {
+const NumberGuessingGame = () => {
+  const generateRandomNumber = () => {
     return Math.floor(Math.random() * 100) + 1;
     //+1 을 붙여주지 않으면 (Math.random() * 100) 0~99가 됨
   };
   //targetNumber에 랜덤으로 생성된 숫자값이 들어갈 수 있도록 설정
   const [targetNumber, setTargetNumber] = useState(generateRandomNumber());
-  const [userGuess, setUserGuess] = useState('');
-  const [message, setMessage] = useState('');
+  const [userGuess, setUserGuess] = useState("");
+  const [message, setMessage] = useState("");
   //횟수제한
   const [attempts, setAttempts] = useState(5);
   //작성한 숫자 기록
@@ -65,7 +65,7 @@ const NumberGuessingGameLimit = () => {
     //NaN = Not a Number
     //isNaN : 주어진 값이 숫자가 맞는지 숫자가 아닌지 판별하는 역할
     if (isNaN(guess)) {
-      setMessage('숫자만 입력이 가능합니다.');
+      setMessage("숫자만 입력이 가능합니다.");
     } else {
       //사용자가 작성한 숫자값을 기록하는 함수 생성
       const newGuessHistory = [...guessHistory, guess];
@@ -80,58 +80,66 @@ const NumberGuessingGameLimit = () => {
         setGuessHistory([]);
         setProgress(0);
       } else {
-        //숫자가 틀렸을 때 횟수를 차감하는 함수를 작성
-        const remainingAttempts = attempts - 1;
-        setAttempts(remainingAttempts);
-        if (remaingAttempts === 0) {
-          setMessage(`게임 오버! 정답은 ${targetNumber} 입니다.`);
-          setTargetNumber(randomNumber());
+        // 숫자가 틀렸을 때 횟수를 차감하는 함수 작성
+        const remainAttempts = attempts - 1;
+        setAttempts(remainAttempts);
+        // const progress = (remainAttempts / 5) * 100;
+
+        if (remainAttempts === 0) {
+          setMessage(`Game Over ! 정답은 ${targetNumber} 입니다.`);
+          setTargetNumber(generateRandomNumber());
           setAttempts(5);
           setGuessHistory([]);
+          setProgress(0);
         } else {
           setMessage(
             guess < targetNumber
-              ? '숫자가 정답보다 낮습니다.'
-              : '숫자가 정답보다 높습니다.'
+              ? "숫자가 정답보다 낮습니다."
+              : "숫자가 정답보다 높습니다."
           );
         }
       }
       //input값 알아서 지워질 수 있도록 초기화 설정
-      setUserGuess('');
+      setUserGuess("");
     }
   };
 
   return (
     <div className="container mt-5">
+      <ProgressBar
+        className="mb-3"
+        variant="danger"
+        now={progress}
+        label={`${progress.toFixed(2)} %`}
+      />
       <div className="card">
         <div className="card-body">
-          <h1>숫자맞추기 게임</h1>
-
-          <p>1부터 100 사이 숫자 맞추기</p>
-          <form onSubmit={inputSubmit}>
+          <h1 className="card-title text-center"> 숫자 맞추기 게임 !</h1>
+          <p className="card-text text-center">1부터 100 사이 숫자 맞추기</p>
+          <form onSubmit={inputSubmit} className="text-center">
             <input
               type="number"
               value={userGuess}
               onChange={inputChange}
               placeholder="숫자를 입력하세요."
-              min="1"
-              max="100"
+              min={1}
+              max={100}
               required
-            />
-
-            <button type="submit" className="btn btn-primary">
-              제출하기
+            />{" "}
+            &nbsp;
+            <button type="submit" className="btn btn-warning">
+              입력
             </button>
+            <br />
           </form>
+          <div className="mt-3 text-center">
+            <p>남은 기회 : {attempts} </p>
+            <p>입력한 숫자 : {guessHistory.join(",")}</p>
+            {message && <div>{message}</div>}
+          </div>
         </div>
       </div>
-      <div>
-        <p>남은 기회 : {attempts}</p>
-        <p>입력한 숫자 : {guessHistory.join(', ')}</p>
-      </div>
-      {message && <div>{message}</div>}
     </div>
   );
 };
-
-export default NumberGuessingGameLimit;
+export default NumberGuessingGame;

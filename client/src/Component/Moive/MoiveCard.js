@@ -1,4 +1,5 @@
-import React from 'react';
+//MovieCard
+import React from "react";
 
 const MovieCard = ({ movie }) => (
   <div>

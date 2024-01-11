@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Weather from './Weather/Weather';
 import MusicPlayer from './Music/MusicPlayer';
 import Emoji from './Emoji';
+import MovieList from './Moive/MovieListCarousel';
 const Home = () => {
   return (
     <Container>
@@ -16,7 +17,7 @@ const Home = () => {
           </Card.Body>
         </Card>
         <Col>
-          <Weather />
+          <MovieList />
           <MusicPlayer />
         </Col>
       </Row>

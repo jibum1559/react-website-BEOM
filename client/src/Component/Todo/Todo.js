@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import CreatePags from './CreatePags';
-import ListPage from './ListPage';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import CreatePags from "./CreatePags";
+import ListPage from "./ListPage";
 
 function Todo() {
   //js로 state 상태 관리

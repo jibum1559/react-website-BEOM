@@ -1,70 +1,70 @@
-import React, { useState } from 'react';
-import { ProgressBar } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import { ProgressBar } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 const Quiz = () => {
   const questions = [
     {
       id: 1,
-      question: 'React는 어떤 라이브러리인가요?',
+      question: "React는 어떤 라이브러리인가요?",
       options: [
-        'UI 라이브러리',
-        '서버 사이드 렌더링 라이브러리',
-        '데이터베이스 라이브러리',
-        '모두',
+        "UI 라이브러리",
+        "서버 사이드 렌더링 라이브러리",
+        "데이터베이스 라이브러리",
+        "모두",
       ],
-      correctAnswer: 'UI 라이브러리',
+      correctAnswer: "UI 라이브러리",
     },
     {
       id: 2,
-      question: 'JSX는 무엇인가요?',
+      question: "JSX는 무엇인가요?",
       options: [
-        'JavaScript XML',
-        'JavaScript Extension',
-        'JavaScript Syntax',
-        'JavaScript eXtension',
+        "JavaScript XML",
+        "JavaScript Extension",
+        "JavaScript Syntax",
+        "JavaScript eXtension",
       ],
-      correctAnswer: 'JavaScript XML',
+      correctAnswer: "JavaScript XML",
     },
     {
       id: 3,
-      question: 'React Hook에서 상태를 어떻게 관리하나요?',
-      options: ['useState', 'useEffect', 'useContext', '모두'],
-      correctAnswer: '모두',
+      question: "React Hook에서 상태를 어떻게 관리하나요?",
+      options: ["useState", "useEffect", "useContext", "모두"],
+      correctAnswer: "모두",
     },
     {
       id: 4,
-      question: 'React에서 컴포넌트 간의 통신을 위해 사용되는 속성은?',
-      options: ['state', 'props', 'context', 'event'],
-      correctAnswer: 'props',
+      question: "React에서 컴포넌트 간의 통신을 위해 사용되는 속성은?",
+      options: ["state", "props", "context", "event"],
+      correctAnswer: "props",
     },
     {
       id: 5,
-      question: 'React에서 라우팅을 구현하기 위한 라이브러리는 무엇인가요?',
+      question: "React에서 라우팅을 구현하기 위한 라이브러리는 무엇인가요?",
       options: [
-        'React Router',
-        'React Navigation',
-        'React Route',
-        'Routing React',
+        "React Router",
+        "React Navigation",
+        "React Route",
+        "Routing React",
       ],
-      correctAnswer: 'React Router',
+      correctAnswer: "React Router",
     },
     {
       id: 6,
-      question: 'React에서 Redux를 사용하기 위한 라이브러리는 무엇인가요?',
-      options: ['react-redux', 'redux-thunk', 'redux-saga', 'redux'],
-      correctAnswer: 'react-redux',
+      question: "React에서 Redux를 사용하기 위한 라이브러리는 무엇인가요?",
+      options: ["react-redux", "redux-thunk", "redux-saga", "redux"],
+      correctAnswer: "react-redux",
     },
     {
       id: 7,
       question:
-        'React 컴포넌트의 생명주기 메서드 중 마운트 단계에서 호출되는 메서드는?',
+        "React 컴포넌트의 생명주기 메서드 중 마운트 단계에서 호출되는 메서드는?",
       options: [
-        'componentDidMount',
-        'componentWillUnmount',
-        'componentDidUpdate',
-        'render',
+        "componentDidMount",
+        "componentWillUnmount",
+        "componentDidUpdate",
+        "render",
       ],
-      correctAnswer: 'componentDidMount',
+      correctAnswer: "componentDidMount",
     },
     // {
     //     id: 8,
@@ -121,12 +121,6 @@ const Quiz = () => {
         </div>
       ) : (
         <div>
-          <ProgressBar
-            vaariant="warning"
-            now={progress}
-            style={{ height: '30px', borderRadius: '10px' }}
-            label={`${progress.toFixed(2)} %`}
-          />
           <ProgressBar now={progress} label={`${progress.toFixed(2)} %`} />
 
           <div className="card">
@@ -156,3 +150,12 @@ export default Quiz;
 
 //<ProgressBar now={progress} label={`${progress.toFixed(2)} %`} />
 //현재 진행 상태 나타내는 부분
+
+{
+  /* <ProgressBar
+            vaariant="warning"
+            now={progress}
+            style={{ height: '30px', borderRadius: '10px' }}
+            label={`${progress.toFixed(2)} %`}
+          /> */
+}

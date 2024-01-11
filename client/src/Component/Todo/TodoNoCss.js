@@ -1,46 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 export default function TodoNoCss() {
   //할 일 목록 상태
   const [todos, setTodos] = useState([]);
   //추가할 할 일
-  const [newTodo, setNewTodo] = useState('');
+  const [newTodo, setNewTodo] = useState("");
   //할 일 갯수
   const [count, setCount] = useState(0);
-  const [date, setDate] = useState('');
-  const [editingIndex, setEditingIndex] = useState(null);
-  const [editTodo, setEditTodo] = useState('');
-  /***************출시일************************
-
+  /***************출시일************************/
+  const [date, setDate] = useState("");
   //수정할 할 일
   //수정할 할 일의 번호의 최초값을 0으로 주면 0번째 인덱스에 있는 할 일을 수정하게 되므로
   //최초값은 null 로 넣어준다.
-
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editTodo, setEditTodo] = useState("");
 
   //할 일 추가하는 버튼 함수 생성하기
- 
-    /*************날짜와 출시일 모두 입력해달라는 경고문 생성*********/
   const addTodo = () => {
+    /***날짜와 출시일 모두 입력해달라는 경고문 생성***/
     if (!date || !newTodo) {
-      alert('출시일과 할 일을 입력해주세요.');
+      alert("출시일과 할 일을 입력해주세요.");
+      return;
     }
+
     //만약에 이미 존재하는 할 일 일경우 추가되지 못하도록 방지
     if (!todos.includes(newTodo)) {
       //새로 넣어준 값이 여기에 포함되지 않는다면 새로운 것을 넣어주겠다
       setTodos([...todos, { newTodo, date }]); //만약에 두 개 이상 저장할 경우 {} 사용해서 저장
       //setTodos([...todos, newTodo]);
-      setNewTodo('');
+      setNewTodo("");
       //카운트는 선택
       setCount((count) => count + 1);
     } else {
       //값이 있으면
-      alert('이미 존재하는 할 일 입니다.');
+      alert("이미 존재하는 할 일 입니다.");
     }
   };
-  //위 상단 타이틀에서 카운트 갯수 넣어주는 useEffect
-  useEffect(() => {
-    document.title = `할 일 갯수 : ${count}`;
-  }, [count]);
 
   //삭제
   const removeTodo = (index) => {
@@ -69,7 +64,7 @@ export default function TodoNoCss() {
   const editStart = (index, todo) => {
     setEditingIndex(index);
     /*수정을 진행할 경우 할 일 목록에 있는 할 일만 가져올 예정
-      왜냐면 날짜는 수정하고 싶을 수 있으니 그대로 가져오지 않는 것*/
+    왜냐면 날짜는 수정하고 싶을 수 있으니 그대로 가져오지 않는 것*/
     setEditTodo(todo.newTodo);
     //setEditTodo(todo);
   };
@@ -81,52 +76,98 @@ export default function TodoNoCss() {
     setTodos(updateTodos);
     setEditingIndex(null);
   };
-*/
+  */
   //수정을 취소하고 싶을 때 취소하기 버튼
   const cancelEdit = () => {
     setEditingIndex(null);
-    setEditTodo('');
+    setEditTodo("");
   };
 
+  //위 상단 타이틀에서 카운트 갯수 넣어주는 useEffect
+  useEffect(() => {
+    document.title = `할 일 갯수 : ${count}`;
+  }, [count]);
+
   return (
-    <div>
-      <h3>할 일 목록</h3>
-      <div>
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <button onClick={addTodo}>할 일 추가하기</button>
+    <div className="container mt-5">
+      <h3>Todo List</h3>
+      <div className="card">
+        <div className="card-body">
+          <style>
+            {`
+              .buttonContainer {
+                text-align: right;
+              }
+              `}
+          </style>
+          {/* 할 일 목록 보여주기*/}
+          <ul>
+            {todos.map((todo, index) => (
+              <li key={index}>
+                {editingIndex === index ? (
+                  <div>
+                    <input
+                      type="text"
+                      value={editTodo}
+                      onChange={(e) => setEditTodo(e.target.value)}
+                    />
+                    &nbsp;
+                    <button onClick={saveEdit} className="btn btn-warning">
+                      완료
+                    </button>
+                    &nbsp;
+                    <button onClick={cancelEdit} className="btn btn-warning">
+                      취소
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    {`${todo.newTodo} 게시일 : ${todo.date}`}
+                    &nbsp;
+                    <button
+                      onClick={() => editStart(index, todo)}
+                      className="btn btn-warning"
+                    >
+                      수정
+                    </button>
+                    &nbsp;
+                    <button
+                      onClick={() => removeTodo(index)}
+                      className="btn btn-warning"
+                    >
+                      삭제
+                    </button>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            {editingIndex === index ? (
-              <div>
-                <input
-                  type="text"
-                  value={editTodo}
-                  onChange={(e) => setEditTodo(e.target.value)}
-                />
-                <button onClick={saveEdit}>수정 완료하기</button>
-                <button onClick={cancelEdit}>수정하기 취소</button>
-              </div>
-            ) : (
-              <div>
-                {`${todo} 출시일 :  ${todo.date}`}
-                <button onClick={() => editStart(index, todo)}>수정하기</button>
-                <button onClick={() => removeTodo(index)}>삭제하기</button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+      <br />
+      <div className="card">
+        <div className="card-body">
+          <div className="buttonContainer">
+            <div>
+              <input
+                type="text"
+                value={newTodo}
+                onChange={(e) => setNewTodo(e.target.value)}
+              />
+              &nbsp;
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+              &nbsp;
+              <button onClick={addTodo} className="btn btn-warning">
+                추가
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
